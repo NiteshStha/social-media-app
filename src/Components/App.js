@@ -1,30 +1,25 @@
 import React from 'react';
-import { Container } from '@material-ui/core';
-import Navbar from './Layouts/Navbar';
-import Feed from './Layouts/Feed';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import Main from './Main';
+import Login from './Auth/Login';
+import SignUp from './Auth/SignUp';
+
+import rootReducer from '../Reducers';
+
+const store = createStore(rootReducer, composeWithDevTools());
 
 function App() {
 	return (
-		<>
-			<Container
-				style={{
-					padding: 0,
-					margin: 0,
-					outline: '1px solid #D9D9D9',
-					maxWidth: '100%',
-					position: 'sticky',
-					top: 0,
-					zIndex: 10,
-				}}
-			>
-				<Container maxWidth='md' style={{ zIndex: 10 }}>
-					<Navbar />
-				</Container>
-			</Container>
-			<Container maxWidth='md'>
-				<Feed />
-			</Container>
-		</>
+		<Provider store={store}>
+			<Router>
+				<Route path='/' exact component={Main} />
+				<Route path='/login' component={Login} />
+				<Route path='/signup' component={SignUp} />
+			</Router>
+		</Provider>
 	);
 }
 

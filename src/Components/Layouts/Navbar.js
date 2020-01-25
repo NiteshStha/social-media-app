@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { AppBar, Toolbar, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { AccountCircle, FavoriteBorder, Explore, Instagram } from '@material-ui/icons';
+
+import ProfileMenu from '../NavMenu/ProfileMenu';
 
 const useStyles = makeStyles(theme => ({
 	title: {
@@ -14,6 +16,18 @@ const useStyles = makeStyles(theme => ({
 
 function Navbar() {
 	const classes = useStyles();
+	const [profileMenu, setProfileMenu] = useState(false);
+	const [anchorEl, setAnchorEl] = React.useState(null);
+
+	const handleProfileClick = event => {
+		setAnchorEl(event.currentTarget);
+		setProfileMenu(true);
+	};
+
+	const handleClose = () => {
+		setAnchorEl(null);
+		setProfileMenu(false);
+	};
 
 	return (
 		<>
@@ -51,9 +65,15 @@ function Navbar() {
 					>
 						Niteshgram
 					</Typography>
-					<Explore style={{ fontSize: 26, marginRight: 20 }} />
-					<FavoriteBorder style={{ fontSize: 26, marginRight: 20 }} />
-					<AccountCircle style={{ fontSize: 26 }} />
+					<Explore style={{ fontSize: 26, marginRight: 20, cursor: 'pointer' }} />
+					<FavoriteBorder
+						style={{ fontSize: 26, marginRight: 20, cursor: 'pointer' }}
+						onClick={handleProfileClick}
+					/>
+					<AccountCircle style={{ fontSize: 26, cursor: 'pointer' }} onClick={handleProfileClick} />
+					{profileMenu && (
+						<ProfileMenu profileMenu={profileMenu} anchorEl={anchorEl} handleClose={handleClose} />
+					)}
 				</Toolbar>
 			</AppBar>
 		</>
