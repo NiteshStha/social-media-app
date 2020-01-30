@@ -62,7 +62,7 @@ function Comment(props) {
 								display: 'block',
 								fontSize: 12,
 								paddingTop: 4,
-								paddingLeft: 10,
+								paddingLeft: 5,
 								color: '#5bc0de',
 							}}
 						>

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { AppBar, Toolbar, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { AccountCircle, FavoriteBorder, Explore, Instagram } from '@material-ui/icons';
@@ -46,14 +47,16 @@ function Navbar() {
 				position='static'
 			>
 				<Toolbar style={{ paddingLeft: 0, paddingRight: 0 }}>
-					<Instagram
-						style={{
-							fontSize: 30,
-							marginRight: 14,
-							borderRight: '1px solid #000',
-							paddingRight: 14,
-						}}
-					/>
+					<Link to='/' style={{ textDecoration: 'none', color: 'inherit' }}>
+						<Instagram
+							style={{
+								fontSize: 30,
+								marginRight: 14,
+								borderRight: '1px solid #000',
+								paddingRight: 14,
+							}}
+						/>
+					</Link>
 					<Typography
 						variant='h6'
 						style={{
@@ -63,7 +66,9 @@ function Navbar() {
 						}}
 						className={classes.title}
 					>
-						Niteshgram
+						<Link to='/' style={{ textDecoration: 'none', color: 'inherit' }}>
+							Niteshgram
+						</Link>
 					</Typography>
 					<Explore style={{ fontSize: 26, marginRight: 20, cursor: 'pointer' }} />
 					<FavoriteBorder

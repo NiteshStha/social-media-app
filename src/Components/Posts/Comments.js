@@ -1,9 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Dialog, DialogTitle, DialogContent, DialogActions, TextField } from '@material-ui/core';
 import { Scrollbars } from 'react-custom-scrollbars';
+
 import { commentsData } from '../MockData';
 import Comment from './Comment';
-import { NumberGenerator } from './../Utilities/NumberGenerator';
+import Utilities from '../Utilities';
 
 function Comments(props) {
 	const { commentState, handleCommentClose } = props;
@@ -27,7 +28,7 @@ function Comments(props) {
 		event.preventDefault();
 		if (reply !== '') {
 			const newComment = {
-				_id: NumberGenerator(),
+				_id: Utilities.NumberGenerator(100000000000000000000),
 				username: 'stha__nitesh',
 				text: reply,
 			};
@@ -35,6 +36,8 @@ function Comments(props) {
 			setComments(comments.concat(newComment));
 			setReply('');
 			handleReplyBlur();
+			const a = Utilities.GroupArrayByKey(comments, 'username');
+			console.log(a['stha__nitesh'][0].username);
 		}
 	};
 
